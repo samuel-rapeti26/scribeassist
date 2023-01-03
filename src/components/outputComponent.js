@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -9,6 +10,7 @@ import Summary from "./summary";
 import ErrorHighligtingCorrection from "./ErrorHighligtingCorrection";
 
 const OutputComponent = ({ clickRevertBack }) => {
+  const narrativeData = useSelector((state) => state);
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
@@ -26,10 +28,10 @@ const OutputComponent = ({ clickRevertBack }) => {
             </TabList>
           </Box>
           <TabPanel value="1">
-            <Summary revert={clickRevertBack} />
+            <Summary revert={clickRevertBack} narrativeData={narrativeData} />
           </TabPanel>
           <TabPanel value="2">
-            <ErrorHighligtingCorrection />
+            <ErrorHighligtingCorrection narrativeData={narrativeData} />
           </TabPanel>
         </TabContext>
       </Box>
