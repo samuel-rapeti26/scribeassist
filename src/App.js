@@ -1,13 +1,60 @@
 import { useState } from "react";
+import { IconButton } from "@mui/material";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import { useDispatch } from "react-redux";
+
+import { AddNarrative } from "./actions";
+import DictionarieComponent from "./components/dictionarieComponent";
 import InputComponent from "./components/inputComponent";
 import OutputComponent from "./components/outputComponent";
-import DictionarieComponent from "./components/dictionarieComponent";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import ManualPdf from "./assets/Smart Error Detector Tool_User Manual_V1.0.0.pdf";
 import "./style.css";
-import { IconButton } from "@mui/material";
+
+const narrativeData = [
+  {
+    id: 1,
+    para: 1,
+    error: "17-Apr-2019",
+    suggestion: "17-Apr-20",
+    errorType: "in progress",
+    category: 1,
+    StartPos: "30",
+    EndPos: "40",
+    operation: "in progress",
+    frontEndAction: "in progress",
+    paraContent: "Initial information received on 17-Apr-2019 regarding..",
+  },
+  {
+    id: 2,
+    para: 2,
+    error: "male",
+    suggestion: "female",
+    errorType: "in progress",
+    category: 1,
+    StartPos: "45",
+    EndPos: "48",
+    operation: "in progress",
+    frontEndAction: "in progress",
+    paraContent:
+      "This case involves a 62 years old male patient had hyperglycemia.",
+  },
+  {
+    id: 3,
+    para: 3,
+    error: "includes",
+    suggestion: "included",
+    errorType: "in progress",
+    category: 1,
+    StartPos: "26",
+    EndPos: "32",
+    operation: "in progress",
+    frontEndAction: "in progress",
+    paraContent: "The patient's medical history includes disability.",
+  },
+];
 
 function App() {
+  const dispatch = useDispatch();
   const [sidebarItems, setSidebarItems] = useState({
     input: true,
     output: false,
@@ -16,6 +63,7 @@ function App() {
   });
 
   const Proceed = () => {
+    dispatch(AddNarrative(narrativeData));
     setSidebarItems({
       ...sidebarItems,
       output: true,
@@ -152,7 +200,7 @@ function App() {
                   height="100%"
                 >
                   <p>
-                    Alternative text - include a link{" "}
+                    Alternative text - include a link
                     <a href={ManualPdf}>to the PDF!</a>
                   </p>
                 </object>

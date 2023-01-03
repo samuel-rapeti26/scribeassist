@@ -20,20 +20,29 @@ const OutputComponent = ({ clickRevertBack }) => {
   return (
     <Paper elevation={3}>
       <Box sx={{ width: "100%", typography: "body1" }}>
-        <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Summary" value="1" />
-              <Tab label="Error Highligting and Correction" value="2" />
-            </TabList>
-          </Box>
-          <TabPanel value="1">
-            <Summary revert={clickRevertBack} narrativeData={narrativeData} />
-          </TabPanel>
-          <TabPanel value="2">
-            <ErrorHighligtingCorrection narrativeData={narrativeData} />
-          </TabPanel>
-        </TabContext>
+        {narrativeData.data.length > 0 ? (
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TabList
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+              >
+                <Tab label="Summary" value="1" />
+                <Tab label="Error Highligting and Correction" value="2" />
+              </TabList>
+            </Box>
+            <TabPanel value="1">
+              <Summary revert={clickRevertBack} narrativeData={narrativeData} />
+            </TabPanel>
+            <TabPanel value="2">
+              <ErrorHighligtingCorrection narrativeData={narrativeData} />
+            </TabPanel>
+          </TabContext>
+        ) : (
+          <h1 className="p-4 flex justify-center text-xl font-semibold animate-bounce text-teal-700">
+            Please add narrative from input and click Proceed on to see output
+          </h1>
+        )}
       </Box>
     </Paper>
   );

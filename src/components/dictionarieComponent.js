@@ -81,7 +81,7 @@ const DictionarieComponent = ({ clickRevertBack }) => {
                 height="100%"
               >
                 <p>
-                  Alternative text - include a link{" "}
+                  Alternative text - include a link
                   <a href={RulesPdf}>to the PDF!</a>
                 </p>
               </object>
