@@ -55,7 +55,7 @@ const ErrorHighligtingCorrection = ({ narrativeData }) => {
       <div className="grid grid-cols-1  lg:grid-cols-2 gap-4 h-full">
         <div className="flex flex-col gap-4">
           <DataGrid
-            rows={narrativeData.narrative}
+            rows={narrativeData.data}
             columns={columns}
             autoHeight
             pageSize={5}
@@ -79,7 +79,7 @@ const ErrorHighligtingCorrection = ({ narrativeData }) => {
             <h2 className="text-xl text-gray-600 border-b pb-2">
               Error Highligted
             </h2>
-            <ErrorsContent paragraphs={narrativeData.narrative} />
+            <ErrorsContent paragraphs={narrativeData.data} />
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@ const ErrorHighligtingCorrection = ({ narrativeData }) => {
             <h2 className="text-xl text-gray-600 border-b pb-2">
               Customized Correction
             </h2>
-            <SuggestionContent paragraphs={narrativeData.narrative} />
+            <SuggestionContent paragraphs={narrativeData.data} />
             <div className="flex justify-center items-center w-full">
               <Button size="large" variant="contained">
                 Finalize.
@@ -101,7 +101,7 @@ const ErrorHighligtingCorrection = ({ narrativeData }) => {
           <h2 className="text-xl text-gray-600 border-b pb-2">
             Final Narrative
           </h2>
-          <FinalNarrative paragraphs={narrativeData.narrative} />
+          <FinalNarrative paragraphs={narrativeData.data} />
           <div className="flex justify-center items-center w-full">
             <Button size="large" variant="contained">
               Download doc.
