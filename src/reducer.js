@@ -1,5 +1,6 @@
 const initialState = {
   data: [],
+  selectedNarratives : []
 };
 
 const reducer = (state = initialState, action) => {
@@ -8,6 +9,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         data: action.payload,
+      };
+    case "UPDATE_SELECTED_NARRATIVES":
+      return {
+        ...state,
+        selectedNarratives: action.payload,
       };
     default:
       return state;

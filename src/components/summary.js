@@ -1,8 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import { useDispatch } from "react-redux";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import { FileCopy, Print, FileDownload } from "@mui/icons-material";
+import { updateSelectedNarratives } from '../actions';
+
 
 const columns = [
   { field: "para", headerName: "Para", width: 90 },
@@ -10,6 +13,7 @@ const columns = [
     field: "error",
     headerName: "Error",
     flex: 1,
+    cellClassName:"highlight--cell",
   },
   {
     field: "suggestion",
@@ -49,7 +53,13 @@ const columns = [
   },
 ];
 
-const Summary = ({ revert, narrativeData }) => {
+const Summary = ({ revert, narrativeData ,onClickCorrectOutput}) => {
+  const dispatch = useDispatch()
+
+  const onSelectionChange= model =>{
+    dispatch(updateSelectedNarratives(model));
+  }
+
   return (
     <Box sx={{ width: "100%" }}>
       <p className="mb-3">
@@ -70,7 +80,7 @@ const Summary = ({ revert, narrativeData }) => {
           <FileDownload /> <span className="ms-1"> Download as PDF </span>
         </Button>
       </div>
-      <DataGrid
+      <DataGrid              
         rows={narrativeData.data}
         columns={columns}
         autoHeight
@@ -79,10 +89,16 @@ const Summary = ({ revert, narrativeData }) => {
         checkboxSelection
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
+        onSelectionModelChange ={onSelectionChange}
         components={{ Toolbar: GridToolbar }}
+        sx={{
+          '& .highlight--cell': {
+            backgroundColor: '#90ee90',
+          },
+        }}
       />
       <div className="flex justify-end items-center mt-4 gap-2">
-        <Button variant="contained" onClick={() => {}}>
+        <Button variant="contained" onClick={() => {onClickCorrectOutput("2")}}>
           Correct Output
         </Button>
         <Button variant="contained" onClick={() => {}}>

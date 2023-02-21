@@ -4,7 +4,7 @@ const ErrorsContent = ({ paragraphs }) => {
   const [highlightedErrors, setHighlightedErrors] = useState("");
   useEffect(() => {
     highlightErrors(paragraphs);
-  });
+  },[paragraphs]);
   const highlightErrors = (paragraphs) => {
     let errors = "";
     paragraphs.forEach((paragraph) => {

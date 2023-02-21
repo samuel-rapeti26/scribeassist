@@ -17,6 +17,10 @@ const OutputComponent = ({ clickRevertBack }) => {
     setValue(newValue);
   };
 
+  const onClickCorrectOutput = (newValue) => {
+    setValue(newValue)
+  }
+
   return (
     <Paper elevation={3}>
       <Box sx={{ width: "100%", typography: "body1" }}>
@@ -32,10 +36,10 @@ const OutputComponent = ({ clickRevertBack }) => {
               </TabList>
             </Box>
             <TabPanel value="1">
-              <Summary revert={clickRevertBack} narrativeData={narrativeData} />
+              <Summary onClickCorrectOutput={onClickCorrectOutput} revert={clickRevertBack} narrativeData={narrativeData} />
             </TabPanel>
             <TabPanel value="2">
-              <ErrorHighligtingCorrection narrativeData={narrativeData} />
+              <ErrorHighligtingCorrection  />
             </TabPanel>
           </TabContext>
         ) : (

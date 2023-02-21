@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useSelector} from "react-redux";
 
 const FinalNarrative = ({ paragraphs }) => {
   const [highlightedSuggestions, setHighlightedSuggestions] = useState([]);
+  const {data, selectedNarratives} = useSelector((state) => state);
+  const selectedRows = data.filter((row) => selectedNarratives.includes(row.id));
   useEffect(() => {
     highlightSuggestions(paragraphs);
-  });
+  },[data,selectedNarratives]);
   const highlightSuggestions = (paragraphs) => {
-    const highlighted = paragraphs.map((paragraph) => {
+    const highlighted = selectedRows.map((paragraph) => {
       const { paraContent, error, suggestion } = paragraph;
       const errorPos = paraContent.indexOf(error);
 
@@ -20,7 +23,7 @@ const FinalNarrative = ({ paragraphs }) => {
       const afterError = paraContent.substring(errorPos + error.length);
 
       // Wrap the suggestion in a span element with a "highlight" class
-      const suggestionSpan = suggestion;
+      const suggestionSpan = `<span class="text-white bg-green-500 px-2 py-1">${suggestion.split("/")[0]}</span>`;
 
       // Concatenate all three parts to get the highlighted paragraph
       const highlightedParagraph = beforeError + suggestionSpan + afterError;
@@ -34,7 +37,7 @@ const FinalNarrative = ({ paragraphs }) => {
   return (
     <div>
       {highlightedSuggestions.map((paragraph) => (
-        <div dangerouslySetInnerHTML={{ __html: paragraph.paraContent }} />
+        <span key={paragraph.para} dangerouslySetInnerHTML={{ __html: paragraph.paraContent }} />
       ))}
     </div>
   );
